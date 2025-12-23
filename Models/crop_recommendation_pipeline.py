@@ -13,8 +13,11 @@ from sklearn.metrics import accuracy_score
 # ===============================
 # FILE PATHS
 # ===============================
-CROP_DATA_PATH = "Crop_recommendation.csv"
-YIELD_DATA_PATH = "crop_yield.csv"
+# CROP_DATA_PATH = "Crop_recommendation.csv"
+# YIELD_DATA_PATH = "crop_yield.csv"
+
+CROP_DATA_PATH = r"C:\Users\PRITHVI\Anweshna Model\AGRO_PREDICT\Models\Data\Crop_recommendation.csv"
+YIELD_DATA_PATH = r"C:\Users\PRITHVI\Anweshna Model\AGRO_PREDICT\Models\Data\crop_yield.csv"
 
 MODEL_PATH = "crop_model.pkl"
 ENCODER_PATH = "label_encoder.pkl"
@@ -36,15 +39,15 @@ def train_model():
 
     # Normalize crop names
     df_crop["label"] = df_crop["label"].str.lower()
-    df_yield["Crop"] = df_yield["Crop"].str.lower()
+    df_yield["crop"] = df_yield["crop"].str.lower()
 
     # Create yield lookup table
     yield_table = (
         df_yield
-        .groupby("Crop")["Yield"]
+        .groupby("crop")["yield"]
         .mean()
         .reset_index()
-        .rename(columns={"Yield": "avg_yield"})
+        .rename(columns={"yield": "avg_yield"})
     )
 
     # Prepare features and labels
@@ -98,7 +101,7 @@ def recommend_crop(input_data, top_n=3):
 
     # Merge yield data
     results = results.merge(
-        yield_table, how="left", left_on="crop", right_on="Crop"
+        yield_table, how="left", left_on="crop", right_on="crop"
     )
     results["avg_yield"] = results["avg_yield"].fillna(0)
 
