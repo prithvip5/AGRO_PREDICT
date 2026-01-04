@@ -1,0 +1,33 @@
+hello backend
+
+backend/
+├── server.js
+├── app.js
+├── .env
+│
+├── config/
+│   ├── db.js
+│
+├── models/
+│   ├── Farmer.js
+│   ├── SoilRecord.js
+│   ├── CropSelection.js
+│   ├── PredictionHistory.js
+│   ├── Otp.js
+│
+├── routes/
+│   ├── auth.routes.js
+│   ├── farmer.routes.js
+│   ├── prediction.routes.js
+│
+├── controllers/
+│   ├── auth.controller.js
+│   ├── farmer.controller.js
+│   ├── prediction.controller.js
+│
+├── services/
+│   ├── ml.service.js
+│   ├── location.service.js
+│
+└── middlewares/
+    └── auth.middleware.js
